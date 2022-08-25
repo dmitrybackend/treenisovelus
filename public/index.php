@@ -1,6 +1,8 @@
 <?php
   // Suoritetaan projektin alustusskripti.
   require_once '../src/init.php';
+    // Luodaan uusi Plates-olio ja kytketään se sovelluksen sivupohjiin.
+    $templates = new League\Plates\Engine('../src/view');
   // Siistitään polku urlin alusta ja mahdolliset parametrit urlin lopusta.
   // Siistimisen jälkeen osoite /~koodaaja/lanify/tapahtuma?id=1 on 
   // lyhentynyt muotoon /tapahtuma.
@@ -9,14 +11,15 @@
 
   // Selvitetään mitä sivua on kutsuttu ja suoritetaan sivua vastaava 
   // käsittelijä.
-  if ($request === '/' || $request === '/tapahtumat') {
-    echo '<h1>Kaikki tapahtumat</h1>';
-  } else if ($request === '/tapahtuma') {
-    echo '<h1>Yksittäisen tapahtuman tiedot</h1>';
-} else if ($request === "/public/") {
-    echo '<h1>Yksittäisen tapahtuman public</h1>';
+  
+
+  if ($request === '/' || $request === '/treenit') {
+    echo $templates->render('treenit');
+  } else if ($request === '/treeni') {
+    echo $templates->render('treeni');
+    
   } else {
-    echo '<h1>Pyydettyä sivua ei löytynyt :(</h1>';
+    echo $templates->render('notfound');
     
   }
   echo $request;
