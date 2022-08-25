@@ -2,7 +2,7 @@
   // Suoritetaan projektin alustusskripti.
   require_once '../src/init.php';
     // Luodaan uusi Plates-olio ja kytketään se sovelluksen sivupohjiin.
-    $templates = new League\Plates\Engine('../src/view');
+    $templates = new League\Plates\Engine(TEMPLATE_DIR);
   // Siistitään polku urlin alusta ja mahdolliset parametrit urlin lopusta.
   // Siistimisen jälkeen osoite /~koodaaja/lanify/tapahtuma?id=1 on 
   // lyhentynyt muotoon /tapahtuma.
