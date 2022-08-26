@@ -5,9 +5,10 @@
     <meta charset="UTF-8">    
   </head>
   <body>
-    <header>
-      <h1>treenisovelus</h1>
+  <header>
+      <h1><a href="<?=BASEURL?>">treeni sovelus</a></h1>
     </header>
+
     <section>
       <?=$this->section('content')?>
     </section>

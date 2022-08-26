@@ -14,6 +14,7 @@ foreach ($treenit as $treeni) {
     echo "<div>$treeni[nimi]</div>";
     echo "<div>$treeni[kuvaus]</div>";
     echo "<div>" . $start->format('j.n.Y') . "-" . $end->format('j.n.Y') . "</div>";
+    echo "<div><a href='treeni?id=" . $treeni['idtreeni'] . "'>TIEDOT</a></div>";
   echo "</div>";
 
 }
