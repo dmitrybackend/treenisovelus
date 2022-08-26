@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="fi">
   <head>
+  <link href="styles/styles.css" rel="stylesheet">
+
     <title>treenisovelus - <?=$this->e($title)?></title>
     <meta charset="UTF-8">    
   </head>
