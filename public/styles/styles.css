@@ -19,6 +19,7 @@
   header {
     background-color: #B8BAC8;
     padding: 1rem 1.5rem;
+   
   }
   header h1 {
     font-size: 3rem;
@@ -56,4 +57,24 @@
     display: flex;
     justify-content: space-between;
   }
-                          
+  form > div {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.5rem;
+  }
+  input {
+    border: 1px solid #999;
+    border-radius: 0.3rem;
+    padding: 0.45rem;
+    font-size: 1rem;
+  }
+  input[type=submit] {
+    padding: 0.5rem 3rem;
+    border-radius: 0.3rem;
+    background-color: #975579;
+    color: #fff;
+    font-weight: bold;
+    min-width: 12rem;
+    margin: 1rem auto;
+  }
+    
