@@ -18,7 +18,13 @@
     $treenit = haeTreenit();
     echo $templates->render('treenit',['treenit' => $treenit]);
   } else if ($request === '/treeni') {
-    echo $templates->render('treeni');
+    require_once MODEL_DIR . 'treeni.php';
+    $treeni = haeTreeni($_GET['id']);
+    if ($treeni) {
+      echo $templates->render('treeni',['treeni' => $treeni]);
+    } else {
+      echo $templates->render('treeninotfound');
+    }
     
   } else {
     echo $templates->render('notfound');
