@@ -14,7 +14,9 @@
   
 
   if ($request === '/' || $request === '/treenit') {
-    echo $templates->render('treenit');
+    require_once MODEL_DIR . 'treeni.php';
+    $treenit = haeTreenit();
+    echo $templates->render('treenit',['treenit' => $treenit]);
   } else if ($request === '/treeni') {
     echo $templates->render('treeni');
     
