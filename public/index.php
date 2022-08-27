@@ -1,4 +1,7 @@
 <?php
+    // Aloitetaan istunnot.
+    session_start();
+
   // Suoritetaan projektin alustusskripti.
   require_once '../src/init.php';
     // Luodaan uusi Plates-olio ja kytketään se sovelluksen sivupohjiin.
@@ -53,7 +56,9 @@
         if (isset($_POST['laheta'])) {
           require_once CONTROLLER_DIR . 'kirjaudu.php';
           if (tarkistaKirjautuminen($_POST['email'],$_POST['salasana'])) {
-            echo "Kirjautuminen ok!";
+            $_SESSION['user'] = $_POST['email'];
+            header("Location: " . $config['urls']['baseUrl']);
+  
           } else {
             echo $templates->render('kirjaudu', [ 'error' => ['virhe' => 'Väärä käyttäjätunnus tai salasana!']]);
           }
