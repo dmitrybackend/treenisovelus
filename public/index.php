@@ -52,7 +52,7 @@
       if (isset($_POST['laheta'])) {
         $formdata = cleanArrayData($_POST);
         require_once CONTROLLER_DIR . 'tili.php';
-        $tulos = lisaaTili($formdata);
+        $tulos = lisaaTili($formdata,$config['urls']['baseUrl']);
         //$tulos =  array(
         //  "status" => "200", "id" => "200");
         if ($tulos['status'] == "200") {
