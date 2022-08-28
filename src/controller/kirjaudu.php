@@ -4,6 +4,7 @@
 
     // Haetaan käyttäjän tiedot sen sähköpostiosoitteella. 
     require_once(MODEL_DIR . 'henkilo.php');
+    $tiedot = haeHenkilo($email);
     $tiedot = haeHenkiloSahkopostilla($email);
     $tiedot = array_shift($tiedot);
 
