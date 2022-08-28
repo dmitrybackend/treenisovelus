@@ -33,9 +33,17 @@
       break;
     case '/treeni':
       require_once MODEL_DIR . 'treeni.php';
+      require_once MODEL_DIR . 'ilmoittautuminen.php';
       $treeni = haeTreeni($_GET['id']);
       if ($treeni) {
-        echo $templates->render('treeni',['treeni' => $treeni]);
+        if ($loggeduser) {
+          $ilmoittautuminen = haeIlmoittautuminen($loggeduser['idhenkilo'],$treeni['idtreeni']);
+        } else {
+          $ilmoittautuminen = NULL;
+        }
+        echo $templates->render('treeni',['treeni' => $treeni,
+                                             'ilmoittautuminen' => $ilmoittautuminen,
+                                             'loggeduser' => $loggeduser]);
       } else {
         echo $templates->render('treeninotfound');
       }
