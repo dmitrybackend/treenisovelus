@@ -118,9 +118,9 @@ function lisaaTili($formdata, $baseurl='') {
       "error"  => $error
     ];
 
+    }
   }
 }
-
 function lahetaVahvavain($email,$url) {
   $message = "Hei!\n\n" . 
              "Olet rekisteröitynyt Treenisovelus-palveluun tällä\n" . 
