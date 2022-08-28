@@ -89,6 +89,34 @@
           logout();
           header("Location: " . $config['urls']['baseUrl']);
           break;
+        
+
+      case '/ilmoittaudu':
+        if ($_GET['id']) {
+          require_once MODEL_DIR . 'ilmoittautuminen.php';
+          $idtreeni = $_GET['id'];
+          if ($loggeduser) {
+            lisaaIlmoittautuminen($loggeduser['idhenkilo'],$idtreeni);
+          }
+          header("Location: treeni?id=$idtreeni");
+        } else {
+          header("Location: treenit");
+        }
+        break;
+       
+        case '/peru':
+          if ($_GET['id']) {
+            require_once MODEL_DIR . 'ilmoittautuminen.php';
+            $idtreeni = $_GET['id'];
+            if ($loggeduser) {
+              poistaIlmoittautuminen($loggeduser['idhenkilo'],$idtreeni);
+            }
+            header("Location: treeni?id=$idtreeni");
+          } else {
+            header("Location: treenit");  
+          }
+          break;
+    
     
     default:
       echo $templates->render('notfound');
