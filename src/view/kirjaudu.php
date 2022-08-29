@@ -17,4 +17,6 @@
   </div>
 </form>
 
+<div> <a href="unohdettu_salasana">Oletko unohtanut salasanasi?</a></div>
+
 <div class="info">Jos sinulla ei ole vielä tunnuksia, niin voit luoda ne <a href="lisaa_tili">täällä</a>.</div>

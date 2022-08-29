@@ -21,4 +21,7 @@
     return DB::run('UPDATE henkilo SET vahvistettu = TRUE WHERE vahvavain = ?', [$avain])->rowCount();
   }
 
+  function paivitaSalasana($avain,$salasana) {
+    return DB::run('UPDATE henkilo SET salasana = ? WHERE vahvavain = ?', [$salasana,$avain])->rowCount();    
+  }
 ?>

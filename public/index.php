@@ -134,8 +134,52 @@
       }       else {
                 header("Location: " . $config['urls']['baseUrl']);
       }
-      break;
-    
+      break;    
+
+      case '/unohdettu_salasana':
+        if (isset($_POST['laheta'])) {
+          require_once CONTROLLER_DIR . 'salasanan_vaihtaminen.php';
+          if (tarkistaEmail($_POST['email'])) {
+            lahetaLinkkiUuttaSalasanaaVarten($_POST['email']);
+            echo $templates->render('unohdettu_salasana', [ 'error' => ['virhe' => 'Lähetetty linkki sähköpostiin!']]);
+          } else {
+            echo $templates->render('unohdettu_salasana', [ 'error' => ['virhe' => 'Väärä käyttäjätunnus!']]);
+          }
+        } else {
+          echo $templates->render('unohdettu_salasana', [ 'error' => []]);
+        }
+        break;
+
+        case '/uusi_salasana':
+          
+          if (isset($_POST['laheta'])) {
+            $formdata = cleanArrayData($_POST);
+            $key = NULL;
+            if (isset($_GET['key'])) {
+              $key = $_GET['key'];
+            }
+            if ($key){
+              require_once CONTROLLER_DIR . 'salasanan_vaihtaminen.php';
+              
+              $tulos = uusiSalasana($formdata,$key,$config['urls']['baseUrl']);
+              
+              if ($tulos['status'] == "200") {
+                echo $templates->render('salasana_vaihdettu', ['formdata' => $formdata]);
+                break;
+              }
+              echo $templates->render('uusi_salasana', ['formdata' => $formdata, 'error' => $tulos['error']]);
+                            
+            }
+            else{
+              echo $templates->render('notfound');
+            }
+              
+          } else {
+            echo $templates->render('uusi_salasana', ['formdata' => [], 'error' => []]);
+            
+          }          
+           
+          break;
     default:
       echo $templates->render('notfound');
   }    
