@@ -15,8 +15,8 @@
   </div>
   <div>
     <label>Osallistujat:</label>
-    <input type="number" name="osallistujat" value="<?= getValue($formdata,'osallistujat') ?>">
-    <div class="error"><span><?= getValue($error,'osallistujat'); ?></span></div>
+    <input type="number" name="osallistujia" value="<?= getValue($formdata,'osallistujia') ?>">
+    <div class="error"><span><?= getValue($error,'osallistujia'); ?></span></div>
   </div>
   <div>
     <label>Treeni alkaa:</label>

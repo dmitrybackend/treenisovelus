@@ -1,9 +1,5 @@
 <?php
-
-function lisaaTreeni($formdata, $baseurl='') {
-
-
-  require_once(MODEL_DIR . 'treeni.php');
+function tarkistaaTreeniFormData($formdata){
   $error = [];
   if (!isset($formdata['nimi']) || !$formdata['nimi']) {
     $error['nimi'] = "Anna nimesi.";
@@ -19,8 +15,6 @@ function lisaaTreeni($formdata, $baseurl='') {
       $error['kuvaus'] = "Syötä kuvaus ilman erikoismerkkejä.";
     }
   }
-
-
 
   if (isset($formdata['tr_alkaa']) && $formdata['tr_alkaa'] &&
       isset($formdata['tr_loppuu']) && $formdata['tr_loppuu']) {
@@ -47,28 +41,78 @@ function lisaaTreeni($formdata, $baseurl='') {
     }
   } 
 
-  if (isset($formdata['osallistujat']) && $formdata['osallistujat'])  {
-    if ($formdata['osallistujat'] < 0) {
-      $error['osallistujat'] = "Osallistuja ei saa olla 0!";
+  if (isset($formdata['osallistujia']) && $formdata['osallistujia'])  {
+    if ($formdata['osallistujia'] < 0) {
+      $error['osallistujia'] = "Osallistuja ei saa olla 0!";
     }
   } else {
-    $error['osallistujat'] = "Syötä max osallistujan määrä!";
+    $error['osallistujia'] = "Syötä max osallistujan määrä!";
   }
+  return $error;
+}
 
+function lisaaTreeni($formdata, $baseurl='') {
+
+  $error = tarkistaaTreeniFormData($formdata);
+  
+  
   if (!$error) {
+    require_once(MODEL_DIR . 'treeni.php');
 
     $nimi = $formdata['nimi'];
     $kuvaus = $formdata['kuvaus'];
-    $osallistujat = $formdata['osallistujat'];
+    $osallistujia = $formdata['osallistujia'];
     $tr_alkaa = $formdata['tr_alkaa'];
     $tr_loppuu = $formdata['tr_loppuu'];
     $ilm_alkaa = $formdata['ilm_alkaa'];
     $ilm_loppuu = $formdata['ilm_loppuu'];  
     
     
-    $idtreeni = luoTreeni($nimi,$kuvaus,$osallistujat,$tr_alkaa,$tr_loppuu,$ilm_alkaa,$ilm_loppuu);
+    $idtreeni = luoTreeni($nimi,$kuvaus,$osallistujia,$tr_alkaa,$tr_loppuu,$ilm_alkaa,$ilm_loppuu);
     
     if ($idtreeni) {
+      return [
+        "status" => 200,
+        "id"     => $idtreeni,
+        "data"   => $formdata
+      ];
+     
+    } else {
+      return [
+        "status" => 500,
+        "data"   => $formdata
+      ];
+    }
+
+  } else {
+
+    return [
+      "status" => 400,
+      "data"   => $formdata,
+      "error"  => $error
+    ];
+
+    }
+  
+}
+function muokkaaTreeni($formdata,$idtreeni, $baseurl='') {
+
+  $error = tarkistaaTreeniFormData($formdata);
+  
+  
+  if (!$error) {
+    require_once(MODEL_DIR . 'treeni.php');
+
+    $nimi = $formdata['nimi'];
+    $kuvaus = $formdata['kuvaus'];
+    $osallistujia = $formdata['osallistujia'];
+    $tr_alkaa = $formdata['tr_alkaa'];
+    $tr_loppuu = $formdata['tr_loppuu'];
+    $ilm_alkaa = $formdata['ilm_alkaa'];
+    $ilm_loppuu = $formdata['ilm_loppuu'];    
+     
+    
+    if (updTreeni($idtreeni,$nimi,$kuvaus,$osallistujia,$tr_alkaa,$tr_loppuu,$ilm_alkaa,$ilm_loppuu)) {
       return [
         "status" => 200,
         "id"     => $idtreeni,

@@ -21,9 +21,10 @@
     }
 
     if ($isAdmin) {
-      echo "<div>";
-      echo "<input type='submit' name='lahetaPoista' value='Poista'>";
-      echo "<input type='submit' name='lahetaMuokkaa' value='Muokkaa'>";   
+      echo "<div class='flexarea'>";
+      
+      echo "<a href='treeniyllapito?idtreeni=$treeni[idtreeni]' class='button'>Muokkaa</a>"; 
+      //echo "<a href='treeniyllapito?idtreeni=$treeni[idtreeni]' class='button'>Poista</a>";  
     echo "</div>";
     }
   }

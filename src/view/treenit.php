@@ -6,8 +6,7 @@
 <?php
 
 if ($isAdmin) {
-  echo "<div>";
-  //echo "<input type='submit' name='lahetaLisaa' value='Lisätään uusi treeni'>"; 
+  echo "<div>";  
   echo "<div class='flexarea'><a href='treeniyllapito' class='button'>Lisätään uusi treeni</a></div>";  
 echo "</div>";
 }

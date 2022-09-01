@@ -14,4 +14,8 @@
     DB::run('INSERT INTO treeni (nimi, kuvaus, osallistujia, tr_alkaa, tr_loppuu, ilm_alkaa, ilm_loppuu) VALUE  (?,?,?,?,?,?,?);',[$nimi,$kuvaus,$osallistujia,$tr_alkaa,$tr_loppuu,$ilm_alkaa,$ilm_loppuu]);
     return DB::lastInsertId(); 
   }
+
+  function updTreeni($idtreeni,$nimi,$kuvaus,$osallistujia,$tr_alkaa,$tr_loppuu,$ilm_alkaa,$ilm_loppuu){
+    return DB::run('UPDATE treeni SET nimi = ?,kuvaus = ?,osallistujia = ?,tr_alkaa = ?,tr_loppuu = ?,ilm_alkaa = ?,ilm_loppuu = ? WHERE idtreeni = ?', [$nimi,$kuvaus,$osallistujia,$tr_alkaa,$tr_loppuu,$ilm_alkaa,$ilm_loppuu,$idtreeni])->rowCount();
+  }
 ?>

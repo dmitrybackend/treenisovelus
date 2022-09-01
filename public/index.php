@@ -189,17 +189,36 @@
             if($isAdmin) {
               if (isset($_POST['laheta'])) {
                 $formdata = cleanArrayData($_POST);
+                if (isset($_GET['idtreeni']) && $_GET['idtreeni']){
+                  $idtreeni = $_GET['idtreeni'];                 
+                }
                 require_once CONTROLLER_DIR . 'treeni.php';
-                $tulos = lisaaTreeni($formdata,$config['urls']['baseUrl']);
-               
+                if($idtreeni){
+                  $tulos = muokkaaTreeni($formdata,$idtreeni,$config['urls']['baseUrl']);
+                  $viestiTyyppi = "treeni_upd";
+                } 
+                else{
+                  $tulos = lisaaTreeni($formdata,$config['urls']['baseUrl']);
+                  $viestiTyyppi = "treeni_luotu";
+
+                } 
+                
                 if ($tulos['status'] == "200") {
-                  echo $templates->render('viesti', ['viesti' => saadaViesti("treeni_luotu","")]);
+                  echo $templates->render('viesti', ['viesti' => saadaViesti($viestiTyyppi,"")]);
                   break;
                 }
                 echo $templates->render('treeniyllapito', ['formdata' => $formdata, 'error' => $tulos['error']]);
                                 
               } else {
-                echo $templates->render('treeniyllapito', ['formdata' => [], 'error' => []]);
+                if (isset($_GET['idtreeni']) && $_GET['idtreeni']){
+                  $idtreeni = $_GET['idtreeni'];
+                  require_once MODEL_DIR . 'treeni.php';
+                  $formdata = haeTreeni($idtreeni);                  
+                }
+                else{
+                  $formdata = [];
+                }
+                echo $templates->render('treeniyllapito', ['formdata' => $formdata, 'error' => []]);
                 
               }
             }
