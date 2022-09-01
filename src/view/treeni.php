@@ -19,5 +19,12 @@
       echo "<a href='peru?id=$treeni[idtreeni]' class='button'>PERU ILMOITTAUTUMINEN</a>";
       echo "</div>";
     }
+
+    if ($isAdmin) {
+      echo "<div>";
+      echo "<input type='submit' name='lahetaPoista' value='Poista'>";
+      echo "<input type='submit' name='lahetaMuokkaa' value='Muokkaa'>";   
+    echo "</div>";
+    }
   }
 ?>

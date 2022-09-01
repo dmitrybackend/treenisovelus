@@ -10,5 +10,8 @@
     return DB::run('SELECT * FROM treeni WHERE idtreeni = ?;',[$id])->fetch();
   }
 
-
+ function luoTreeni($nimi,$kuvaus,$osallistujia,$tr_alkaa,$tr_loppuu,$ilm_alkaa,$ilm_loppuu) {
+    DB::run('INSERT INTO treeni (nimi, kuvaus, osallistujia, tr_alkaa, tr_loppuu, ilm_alkaa, ilm_loppuu) VALUE  (?,?,?,?,?,?,?);',[$nimi,$kuvaus,$osallistujia,$tr_alkaa,$tr_loppuu,$ilm_alkaa,$ilm_loppuu]);
+    return DB::lastInsertId(); 
+  }
 ?>

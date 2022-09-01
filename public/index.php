@@ -1,15 +1,19 @@
 <?php
     // Aloitetaan istunnot.
     session_start();
-
+   
   // Suoritetaan projektin alustusskripti.
   require_once '../src/init.php';
+  require_once CONTROLLER_DIR . 'viesti.php';
     // Haetaan kirjautuneen käyttäjän tiedot.
     if (isset($_SESSION['user'])) {
       require_once MODEL_DIR . 'henkilo.php';
       $loggeduser = haeHenkilo($_SESSION['user']);
+      $isAdmin = $loggeduser['admin'];
+
     } else {
       $loggeduser = NULL;
+      $isAdmin = NULL;
     }
   
     // Luodaan uusi Plates-olio ja kytketään se sovelluksen sivupohjiin.
@@ -29,7 +33,7 @@
     case '/treenit':
       require_once MODEL_DIR . 'treeni.php';
       $treenit = haeTreenit();
-      echo $templates->render('treenit',['treenit' => $treenit]);
+      echo $templates->render('treenit',['treenit' => $treenit, 'isAdmin' => $isAdmin]);
       break;
     case '/treeni':
       require_once MODEL_DIR . 'treeni.php';
@@ -43,7 +47,7 @@
         }
         echo $templates->render('treeni',['treeni' => $treeni,
                                              'ilmoittautuminen' => $ilmoittautuminen,
-                                             'loggeduser' => $loggeduser]);
+                                             'loggeduser' => $loggeduser,'isAdmin' => $isAdmin]);
       } else {
         echo $templates->render('treeninotfound');
       }
@@ -53,8 +57,7 @@
         $formdata = cleanArrayData($_POST);
         require_once CONTROLLER_DIR . 'tili.php';
         $tulos = lisaaTili($formdata,$config['urls']['baseUrl']);
-        //$tulos =  array(
-        //  "status" => "200", "id" => "200");
+        
         if ($tulos['status'] == "200") {
           echo $templates->render('tili_luotu', ['formdata' => $formdata]);
           break;
@@ -180,11 +183,36 @@
           }          
            
           break;
+
+
+          case '/treeniyllapito':
+            if($isAdmin) {
+              if (isset($_POST['laheta'])) {
+                $formdata = cleanArrayData($_POST);
+                require_once CONTROLLER_DIR . 'treeni.php';
+                $tulos = lisaaTreeni($formdata,$config['urls']['baseUrl']);
+               
+                if ($tulos['status'] == "200") {
+                  echo $templates->render('viesti', ['viesti' => saadaViesti("treeni_luotu","")]);
+                  break;
+                }
+                echo $templates->render('treeniyllapito', ['formdata' => $formdata, 'error' => $tulos['error']]);
+                                
+              } else {
+                echo $templates->render('treeniyllapito', ['formdata' => [], 'error' => []]);
+                
+              }
+            }
+            else {
+              echo $templates->render('notfound');
+            }
+            break;
     default:
-      echo $templates->render('notfound');
+         
+      echo $templates->render('viesti', ['viesti' => saadaViesti("","")]);
   }    
 
    
-
+ 
  
 ?> 

@@ -5,6 +5,13 @@
 <div class='treenit'>
 <?php
 
+if ($isAdmin) {
+  echo "<div>";
+  //echo "<input type='submit' name='lahetaLisaa' value='Lisätään uusi treeni'>"; 
+  echo "<div class='flexarea'><a href='treeniyllapito' class='button'>Lisätään uusi treeni</a></div>";  
+echo "</div>";
+}
+
 foreach ($treenit as $treeni) {
 
   $start = new DateTime($treeni['tr_alkaa']);
@@ -16,6 +23,8 @@ foreach ($treenit as $treeni) {
     echo "<div>" . $start->format('j.n.Y') . "-" . $end->format('j.n.Y') . "</div>";
     echo "<div><a href='treeni?id=" . $treeni['idtreeni'] . "'>TIEDOT</a></div>";
   echo "</div>";
+
+  
 
 }
 
