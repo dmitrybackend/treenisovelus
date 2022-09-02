@@ -41,7 +41,7 @@
     <div class="error"><span><?= getValue($error,'ilm_loppuu'); ?></span></div>
     <div class="error"><span><?= getValue($error,'ilm_tr'); ?></span></div>
   </div>
-
+  <input type="hidden" name="idtreeni" value="<?= getValue($formdata,'idtreeni') ?>">
   <div>
     <input type="submit" name="laheta" value="Tallenna">
   </div>

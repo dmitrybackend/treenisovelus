@@ -189,11 +189,11 @@
             if($isAdmin) {
               if (isset($_POST['laheta'])) {
                 $formdata = cleanArrayData($_POST);
-                if (isset($_GET['idtreeni']) && $_GET['idtreeni']){
-                  $idtreeni = $_GET['idtreeni'];                 
+                if (isset($_POST['idtreeni']) && $_POST['idtreeni']){
+                  $idtreeni = $_POST['idtreeni'];                 
                 }
                 require_once CONTROLLER_DIR . 'treeni.php';
-                if($idtreeni){
+                if($idtreeni && $idtreeni > 0 ){
                   $tulos = muokkaaTreeni($formdata,$idtreeni,$config['urls']['baseUrl']);
                   $viestiTyyppi = "treeni_upd";
                 } 
@@ -226,6 +226,36 @@
               echo $templates->render('notfound');
             }
             break;
+        case '/treenin_poistaminen':
+          if($isAdmin) {
+            if (isset($_POST['laheta']) && isset($_POST['idtreeni']) && $_POST['idtreeni']) {
+              require_once MODEL_DIR . 'treeni.php';
+              $tulos = poistaTreeni($_POST['idtreeni']);
+              if($tulos){
+                echo $templates->render('viesti', ['viesti' => saadaViesti("treeni_poistettu","")]);
+                break;
+              }
+              echo $templates->render('viesti', ['viesti' => saadaViesti("treeni_eipoistetu","")]);
+            }
+
+            elseif (isset($_GET['idtreeni']) && $_GET['idtreeni']){
+              $idtreeni = $_GET['idtreeni'];
+              require_once MODEL_DIR . 'treeni.php';
+              $formdata = haeTreeni($idtreeni);                  
+            }
+            else{
+              echo $templates->render('viesti', ['viesti' => saadaViesti()]);
+            }
+            echo $templates->render('treenin_poistaminen', ['treeni' => $formdata, 'isAdmin' =>$isAdmin]);          
+          
+
+          }
+            else {
+              echo $templates->render('viesti', ['viesti' => saadaViesti()]);
+
+            } 
+
+              break;
     default:
          
       echo $templates->render('viesti', ['viesti' => saadaViesti("","")]);

@@ -23,8 +23,8 @@
     if ($isAdmin) {
       echo "<div class='flexarea'>";
       
-      echo "<a href='treeniyllapito?idtreeni=$treeni[idtreeni]' class='button'>Muokkaa</a>"; 
-      //echo "<a href='treeniyllapito?idtreeni=$treeni[idtreeni]' class='button'>Poista</a>";  
+       echo "<a href='treeniyllapito?idtreeni=$treeni[idtreeni]' class='button'>Muokkaa</a>"; 
+      echo "<a href='treenin_poistaminen?idtreeni=$treeni[idtreeni]' class='button'>Poista</a>";  
     echo "</div>";
     }
   }

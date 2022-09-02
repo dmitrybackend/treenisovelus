@@ -18,4 +18,7 @@
   function updTreeni($idtreeni,$nimi,$kuvaus,$osallistujia,$tr_alkaa,$tr_loppuu,$ilm_alkaa,$ilm_loppuu){
     return DB::run('UPDATE treeni SET nimi = ?,kuvaus = ?,osallistujia = ?,tr_alkaa = ?,tr_loppuu = ?,ilm_alkaa = ?,ilm_loppuu = ? WHERE idtreeni = ?', [$nimi,$kuvaus,$osallistujia,$tr_alkaa,$tr_loppuu,$ilm_alkaa,$ilm_loppuu,$idtreeni])->rowCount();
   }
+  function poistaTreeni($idtreeni){
+    return DB::run('DELETE from treeni WHERE idtreeni = ?', [$idtreeni])->rowCount();
+  }
 ?>
