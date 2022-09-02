@@ -21,11 +21,19 @@
     }
 
     if ($isAdmin) {
-      echo "<div class='flexarea'>";
-      
-       echo "<a href='treeniyllapito?idtreeni=$treeni[idtreeni]' class='button'>Muokkaa</a>"; 
+      echo "<div class='flexarea'>";      
+      echo "<a href='treeniyllapito?idtreeni=$treeni[idtreeni]' class='button'>Muokkaa</a>"; 
       echo "<a href='treenin_poistaminen?idtreeni=$treeni[idtreeni]' class='button'>Poista</a>";  
-    echo "</div>";
+      echo "</div>";
+      echo "<h2>Osallistujat:</h2>";
+      echo "<table>";
+      foreach ($osallistujat as $osallistuja) {      
+        echo "<tr>";
+        echo "<td>".$osallistuja['nimi']. "</td>";
+        echo "<td>".$osallistuja['email']. "</td>";
+        echo "</tr>";      
+      }
+      echo "</table>";
     }
   }
 ?>

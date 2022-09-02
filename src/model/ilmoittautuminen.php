@@ -17,5 +17,8 @@
     return DB::run('DELETE FROM ilmoittautuminen  WHERE idhenkilo = ? AND idtreeni = ?',
                    [$idhenkilo, $idtreeni])->rowCount();
   }
+  function haeOsallistujat($idtreeni) {
+    return DB::run('SELECT HK.nimi as nimi, email FROM ilmoittautuminen as ILM, henkilo as HK Where HK.idhenkilo= ILM.idhenkilo AND idtreeni = ?', [$idtreeni])->fetchAll();
+  }
 
 ?>

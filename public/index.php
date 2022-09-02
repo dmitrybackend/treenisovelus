@@ -45,9 +45,16 @@
         } else {
           $ilmoittautuminen = NULL;
         }
+        if($isAdmin) {
+          $osallistujat = haeOsallistujat($treeni['idtreeni']);
+        }
+        else {
+          $osallistujat =   NULL;
+        }
         echo $templates->render('treeni',['treeni' => $treeni,
                                              'ilmoittautuminen' => $ilmoittautuminen,
-                                             'loggeduser' => $loggeduser,'isAdmin' => $isAdmin]);
+                                             'loggeduser' => $loggeduser,'isAdmin' => $isAdmin, 
+                                             'osallistujat' => $osallistujat]);
       } else {
         echo $templates->render('treeninotfound');
       }
