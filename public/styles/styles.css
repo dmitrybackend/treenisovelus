@@ -7,7 +7,7 @@
   html {
     font-family: 'Rubik', sans-serif;
     background: rgb(0,34,0);
-    background: linear-gradient(120deg, rgba(0,34,0,1) 0%, rgba(9,136,144,1) 36%, rgba(151,85,121,1) 100%);
+    background: linear-gradient(120deg, rgb(5, 0, 71) 0%, rgba(9,136,144,1) 36%, rgb(158, 199, 241) 100%);
   }
   body {
     background-color: #fff;
